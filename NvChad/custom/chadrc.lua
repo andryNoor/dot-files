@@ -4,7 +4,12 @@ local M = {}
 
 M.ui = {
   theme = "tokyonight",
+  -- theme = "everblush",
   transparency = true,
+}
+
+M.plugins = {
+  user = require("custom.plugins")
 }
 
 return M
