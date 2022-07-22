@@ -25,7 +25,7 @@ return {
         ft = { "html", "javascriptreact" },
         after = "nvim-treesitter",
         config = function ()
-          require("custom.lugins.smolconfigs").autotag()
+          require("custom.plugins.smolconfigs").autotag()
         end,
       },
 
