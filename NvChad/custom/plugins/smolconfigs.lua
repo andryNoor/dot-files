@@ -8,12 +8,12 @@ M.autotag = function ()
   end
 end
 
-M.autosave = function ()
-  local present, autosave = pcall(require, "autosave")
-
-  if present then
-    autosave.setup()
-  end
-end
+-- M.autosave = function ()
+--   local present, autosave = pcall(require, "autosave")
+--
+--   if present then
+--     autosave.setup()
+--   end
+-- end
 
 return M
