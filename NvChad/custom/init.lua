@@ -80,8 +80,3 @@ autocmd("BufEnter", {
 --     vim.cmd("highlight clear CursorLine")
 --   end
 -- })
-
--- TODO
--- [done] run HiLSPgui when lspserver diagnostic already loaded
--- refine user_cmd (new_cmd)
--- set new keymap for HiLSPgui and HiTSgui
