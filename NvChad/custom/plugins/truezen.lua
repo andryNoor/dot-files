@@ -22,10 +22,10 @@ local options = {
 	},
 	modes = {
 		ataraxis = {
-			left_padding = 3,
+			left_padding = 5,
 			right_padding = 3,
-			top_padding = 1,
-			bottom_padding = 1,
+			top_padding = 2,
+			bottom_padding = 2,
 			auto_padding = false,
 		},
 	},
