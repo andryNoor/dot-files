@@ -5,7 +5,7 @@ local M = {
     },
 
     CursorLine = {
-      bg = "black2",
+      bg = "line",
     },
   },
 

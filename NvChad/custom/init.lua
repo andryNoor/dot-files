@@ -11,7 +11,7 @@ new_cmd("HiCursorLine", function()
 	-- reason: NvChad clear CursorLine highlight after manually toggle or changing theme
 
 	local colors = require("base46").get_theme_tb("base_30")
-	local black2 = colors.black2
+	local black2 = colors.line -- colors.black2
 	local cmd = string.format("highlight CursorLine guibg=%s cterm=bold gui=bold", black2)
 
 	vim.cmd(cmd)
