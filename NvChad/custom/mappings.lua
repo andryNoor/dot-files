@@ -115,12 +115,12 @@ M.general = {
 
 -- note: just fix the mis-place name/description of this shortcut ('goto next' and 'goto prev')
 -- will remove this override if it got fixed in the next update of NvChad
-M.tabufline = {
-  n = {
-    -- cycle through tabs
-    ["<leader>tp"] = { "<cmd> tabprevious <CR>", "  goto prev tab" },
-    ["<leader>tn"] = { "<cmd> tabnext <CR> ", "  goto next tab" },
-  },
-}
+-- M.tabufline = {
+--   n = {
+--     -- cycle through tabs
+--     ["<leader>tp"] = { "<cmd> tabprevious <CR>", "  goto prev tab" },
+--     ["<leader>tn"] = { "<cmd> tabnext <CR> ", "  goto next tab" },
+--   },
+-- }
 
 return M
