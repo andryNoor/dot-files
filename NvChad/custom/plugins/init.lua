@@ -51,6 +51,11 @@ return {
     },
   },
 
+  -- Override whichkey [re-enabled] (Reason: disabled by default)
+  ["folke/which-key.nvim"] = {
+    disable = false
+  },
+
 	---[[
 	-- PLUGIN STUFF FROM Siduck
 
