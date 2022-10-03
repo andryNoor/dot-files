@@ -25,6 +25,9 @@ local sources = {
   -- Dart
   b.formatting.dart_format,
 
+  -- Kotlin
+  b.formatting.ktlint,
+
   -- cpp
   -- b.formatting.clang_format,
 }
