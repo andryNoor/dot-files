@@ -4,13 +4,13 @@ local override = require("custom.plugins.configs.override")
 -- make sure you maintain the structure of `core/default_config.lua` here,
 
 M.ui = {
-	theme_toggle = { "gruvbox", "tokyonight" },
-	theme = "tokyonight",
+	theme_toggle = { "chadracula", "tokyonight" },
+	theme = "chadracula",
 	-- theme = "onedark",
-	-- theme = "tokyonight",
 	-- theme = "nightowl",
-	-- theme = "tokyonight",
-	transparency = true,
+	-- theme = "nightowl",
+	-- theme = "nightowl",
+	transparency = false,
 	hl_override = require("custom.highlights").overriden_hlgroups,
 }
 
