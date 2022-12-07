@@ -11,15 +11,17 @@ local M = {
 
   overriden_hlgui = {
     HiLSPgui = {
+      -- all highlighted as italic
       "LspReferenceText",
       "LspReferenceRead",
       "LspReferenceWrite",
+      "LspSignatureActiveParameter",
+      "RenamerTitle",
       "DiagnosticHint",
       "DiagnosticError",
       "DiagnosticWarn",
       "DiagnosticInformation",
-      "LspSignatureActiveParameter",
-      "RenamerTitle",
+      "DiagnosticInfo", -- flutter-tools.nvim
     },
     HiTSgui = {
       italic_bold = {

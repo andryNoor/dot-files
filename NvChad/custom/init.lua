@@ -58,10 +58,22 @@ autocmd("BufEnter", {
     highlight Comment cterm=italic gui=italic
     " override CursorLine gui
     highlight CursorLine cterm=bold gui=bold
-    " highlight LSP, Treesitter and general syntax
+    " highlight LSP and general syntax
     HiLSPgui
     " highlight Treesitter and general syntax
     HiTSgui
+    ]])
+	end,
+})
+
+-- highlight LSP gui (specific for dart / a workaround for flutter-tools.nvim highlighting behaviour)
+autocmd("FileType", {
+  pattern = "dart",
+	callback = function()
+		-- vim.cmd("highlight CursorLine cterm=bold gui=bold")
+		vim.cmd([[
+    " highlight LSP and general syntax
+    HiLSPgui
     ]])
 	end,
 })
