@@ -1,5 +1,17 @@
 local M = {}
 
+M.lspconfig = {
+	n = {
+		-- Temporarily set this until getting fix by the next update of NvChad (mapping)
+		["<leader>fm"] = {
+			function()
+				vim.lsp.buf.format({ async = true }) -- reason: due to vim.lsp.buf.formatting({}) is deprecated
+			end,
+			"lsp formatting",
+		},
+	},
+}
+
 M.truzen = {
 	n = {
 		["<leader>ta"] = { "<cmd> TZAtaraxis <CR>", "   truzen ataraxis" },
@@ -101,7 +113,7 @@ M.nvterm = {
 }
 
 M.general = {
-  n = {
+	n = {
 		-- toggle transparency
 		["<leader>tr"] = {
 			function()
