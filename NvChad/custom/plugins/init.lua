@@ -17,44 +17,44 @@ return {
 	-- 	end,
 	-- },
 
-  -- nvim-cursorline (delay cursorline/phasing)
-  ["yamatsum/nvim-cursorline"] = {
-    setup = function ()
-      require("core.lazy_load").on_file_open "nvim-cursorline"
-    end,
-    config = function ()
-      require("custom.plugins.configs.user.nvim-cursorline")
-    end,
-  },
+	-- nvim-cursorline (delay cursorline/phasing)
+	["yamatsum/nvim-cursorline"] = {
+		setup = function()
+			require("core.lazy_load").on_file_open("nvim-cursorline")
+		end,
+		config = function()
+			require("custom.plugins.configs.user.nvim-cursorline")
+		end,
+	},
 
-  -- Limelight
-  ["junegunn/limelight.vim"] = {
-       vim.cmd("let g:limelight_conceal_guifg = '#777777'"),
-  },
+	-- Limelight
+	["junegunn/limelight.vim"] = {
+		vim.cmd("let g:limelight_conceal_guifg = '#777777'"),
+	},
 
-  -- Neoscroll (smooth scrolling)
-  ["karb94/neoscroll.nvim"] = {
-    config = function ()
-      require("custom.plugins.configs.user.neoscroll")
-    end,
-  },
+	-- Neoscroll (smooth scrolling)
+	["karb94/neoscroll.nvim"] = {
+		config = function()
+			require("custom.plugins.configs.user.neoscroll")
+		end,
+	},
 
-  -- suda.vim (Read or Write file with 'sudo')
-  ["lambdalisue/suda.vim"] = {
-    vim.cmd("let g:suda#prompt = 'JNET::suda -> [sudo] password: '")
-  },
+	-- suda.vim (Read or Write file with 'sudo')
+	["lambdalisue/suda.vim"] = {
+		vim.cmd("let g:suda#prompt = 'JNET::suda -> [sudo] password: '"),
+	},
 
-  -- Override Tabufline (Nvchad/ui)
-  ["NvChad/ui"] = {
-    tabufline = {
-      lazyload = true,
-    },
-  },
+	-- Override Tabufline (Nvchad/ui)
+	["NvChad/ui"] = {
+		tabufline = {
+			lazyload = true,
+		},
+	},
 
-  -- Override whichkey [re-enabled] (Reason: disabled by default)
-  ["folke/which-key.nvim"] = {
-    disable = false
-  },
+	-- Override whichkey [re-enabled] (Reason: disabled by default)
+	["folke/which-key.nvim"] = {
+		disable = false,
+	},
 
 	---[[
 	-- PLUGIN STUFF FROM Siduck
@@ -88,7 +88,7 @@ return {
 		end,
 	},
 
-	-- get highlight group under cursor
+	-- Get highlight group under cursor
 	["nvim-treesitter/playground"] = {
 		cmd = "TSCaptureUnderCursor",
 		config = function()
@@ -105,17 +105,30 @@ return {
 	-- },
 
 	-- Alpha/Init/Welcome screen
-  ["goolord/alpha-nvim"] = {
-    disable = false,
-    cmd = "Alpha",
-  },
+	["goolord/alpha-nvim"] = {
+		disable = false,
+		cmd = "Alpha",
+	},
 
 	-- lspconfig
-  ["neovim/nvim-lspconfig"] = {
-    config = function ()
-      require "plugins.configs.lspconfig"
-      require "custom.plugins.lspconfig"
-    end,
-  },
+	["neovim/nvim-lspconfig"] = {
+		-- after = "flutter-tools.nvim",
+		config = function()
+			require("plugins.configs.lspconfig")
+			require("custom.plugins.lspconfig")
+		end,
+	},
+	-- ]]
+
+	---[[
+	-- DEVELOPMENT OR PROGRAMMING SPECIFIC TOOLS
+
+	-- Flutter Tools
+	["akinsho/flutter-tools.nvim"] = {
+		config = function()
+			require("custom.plugins.configs.user.flutter-tools")
+		end,
+	},
+
 	-- ]]
 }
