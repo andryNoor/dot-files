@@ -92,3 +92,6 @@ autocmd("FileType", {
 --     vim.cmd("highlight clear CursorLine")
 --   end
 -- })
+--
+-- Neovide Configuration
+require("custom.neovide")
