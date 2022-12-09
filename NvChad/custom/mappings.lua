@@ -112,6 +112,46 @@ M.nvterm = {
 	},
 }
 
+M.minimap = {
+	n = {
+		-- close minimap
+		["<leader>mc"] = {
+			"<ESC><cmd>lua MiniMap.close()<CR>",
+			"   close minimap",
+		},
+
+		-- toggle focus
+		["<leader>mf"] = {
+			"<ESC><cmd>lua MiniMap.toggle_focus()<CR>",
+			"   toggle focus minimap",
+		},
+
+		-- open minimap
+		["<leader>mo"] = {
+			"<ESC><cmd>lua MiniMap.open()<CR>",
+			"   open minimap",
+		},
+
+		-- refresh minimap
+		["<leader>mr"] = {
+			"<ESC><cmd>lua MiniMap.refresh()<CR>",
+			"   refresh minimap",
+		},
+
+		-- toggle side
+		["<leader>ms"] = {
+			"<ESC><cmd>lua MiniMap.toggle_side()<CR>",
+			"   toggle side minimap",
+		},
+
+		-- toggle minimap
+		["<leader>mt"] = {
+			"<ESC><cmd>lua MiniMap.toggle()<CR>",
+			"   toggle minimap",
+		},
+	},
+}
+
 M.general = {
 	n = {
 		-- toggle transparency
@@ -121,6 +161,9 @@ M.general = {
 			end,
 			"   toggle transparency",
 		},
+
+		-- clear search hl + refresh minimap hl
+		["<ESC>"] = { "<cmd> noh <CR><cmd>lua MiniMap.refresh()<CR>", "no highlight" },
 	},
 }
 

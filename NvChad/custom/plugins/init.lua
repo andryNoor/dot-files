@@ -130,5 +130,11 @@ return {
 		end,
 	},
 
+  -- Code MiniMap
+  ["echasnovski/mini.map"] = {
+    config = function()
+      require("custom.plugins.configs.user.minimap")
+    end,
+  },
 	-- ]]
 }
