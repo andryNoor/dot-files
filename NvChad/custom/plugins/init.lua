@@ -124,11 +124,12 @@ return {
 	-- DEVELOPMENT OR PROGRAMMING SPECIFIC TOOLS
 
 	-- Flutter Tools
-	["akinsho/flutter-tools.nvim"] = {
-		config = function()
-			require("custom.plugins.configs.user.flutter-tools")
-		end,
-	},
+  -- Msg: Temporarily disabled while learning Dart (standalone)
+	-- ["akinsho/flutter-tools.nvim"] = {
+	-- 	config = function()
+	-- 		require("custom.plugins.configs.user.flutter-tools")
+	-- 	end,
+	-- },
 
   -- Code MiniMap
   ["echasnovski/mini.map"] = {
