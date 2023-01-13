@@ -28,6 +28,9 @@ local sources = {
   -- Kotlin
   b.formatting.ktlint,
 
+  -- C# dotnet
+  b.formatting.csharpier,
+
   -- cpp
   -- b.formatting.clang_format,
 }
