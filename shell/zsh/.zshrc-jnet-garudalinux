@@ -257,6 +257,9 @@ source /usr/share/nvm/init-nvm.sh
 # dart/flutter
 export PATH=$PATH:/opt/flutter/bin/dart
 
+# dotnet/c# tools
+export PATH=$PATH:/home/mnoor/.dotnet/tools
+
 # wine6 - lutris
 # export PATH=$PATH:~/.local/share/lutris/runners/wine/lutris-6.0-x86_64/bin
 export WINEPREFIX=~/Games/grand-theft-auto-san-andreas
