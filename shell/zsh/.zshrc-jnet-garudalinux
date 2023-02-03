@@ -256,9 +256,13 @@ source /usr/share/nvm/init-nvm.sh
 
 # dart/flutter
 export PATH=$PATH:/opt/flutter/bin/dart
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # dotnet/c# tools
 export PATH=$PATH:/home/mnoor/.dotnet/tools
+
+# asdf-vm | asdf
+. /opt/asdf-vm/asdf.sh
 
 # wine6 - lutris
 # export PATH=$PATH:~/.local/share/lutris/runners/wine/lutris-6.0-x86_64/bin
@@ -292,6 +296,7 @@ alias x='notify-send "xonsh activated" && xonsh'
 alias replugyichip="echo 'resetting YICHIP...' && sudo reset_usb.py search YICHIP "
 alias replugbt="echo 'resetting Bluetooth Dongle...' && sudo reset_usb.py search Bluetooth "
 alias replug="echo 'resetting YICHIP and Bluetooth Dongle...' && replugyichip && replugbt"
+alias tsn="ts-node-transpile-only"
 
 ## End JoolakNET Specific
 
