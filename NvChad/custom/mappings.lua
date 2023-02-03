@@ -1,16 +1,16 @@
 local M = {}
 
-M.lspconfig = {
-	n = {
-		-- Temporarily set this until getting fix by the next update of NvChad (mapping)
-		["<leader>fm"] = {
-			function()
-				vim.lsp.buf.format({ async = true }) -- reason: due to vim.lsp.buf.formatting({}) is deprecated
-			end,
-			"lsp formatting",
-		},
-	},
-}
+-- M.lspconfig = {
+-- 	n = {
+-- 		-- Temporarily set this until getting fix by the next update of NvChad (mapping)
+-- 		["<leader>fm"] = {
+-- 			function()
+-- 				vim.lsp.buf.format({ async = true }) -- reason: due to vim.lsp.buf.formatting({}) is deprecated
+-- 			end,
+-- 			"lsp formatting",
+-- 		},
+-- 	},
+-- }
 
 M.truzen = {
 	n = {
@@ -154,6 +154,14 @@ M.minimap = {
 
 M.general = {
 	n = {
+		-- Temporarily set this until getting fix by the next update of NvChad (mapping)
+		-- formatting code
+		["<leader>fm"] = {
+			function()
+				vim.lsp.buf.format({ async = true }) -- reason: due to vim.lsp.buf.formatting({}) is deprecated
+			end,
+			"lsp formatting",
+		},
 		-- toggle transparency
 		["<leader>tr"] = {
 			function()
