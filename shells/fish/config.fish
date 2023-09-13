@@ -173,3 +173,14 @@ pyenv init - | source
 
 # PIP search (pip package: pip-search)
 # Already moved to ~/.config/fish/functions/pip.fish
+
+# mcfly (Ctrl-r shell History https://github.com/cantino/mcfly/tree/master)
+mcfly init fish | source
+# set -gx MCFLY_LIGHT TRUE # Light Mode color scheme
+set -gx MCFLY_KEY_SCHEME vim # Vim Key bindings (default: emacs)
+set -gx MCFLY_FUZZY 2 # Fuzzy Searching (2 - 5 value gives good result)
+set -gx MCFLY_INTERFACE_VIEW TOP # Interface View (default: TOP, option: TOP and BOTTOM)
+# set -gx MCFLY_DISABLE_MENU TRUE # Diable Menu Interface
+set -gx MCFLY_RESULTS_SORT LAST_RUN # Results Sorting (default: RANK, option: RANK, LAST_RUN)
+# set -gx MCFLY_PROMPT "❯" # Custom Prompt (default: "$")
+
