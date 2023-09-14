@@ -174,6 +174,12 @@ pyenv init - | source
 # PIP search (pip package: pip-search)
 # Already moved to ~/.config/fish/functions/pip.fish
 
+# Configure or Change fzf.fish keybindings
+# https://github.com/PatrickF1/fzf.fish/blob/main/functions/_fzf_configure_bindings_help.fish
+#
+# Ctrl-h HISTORY (default: Ctrl-r)
+fzf_configure_bindings --history=\ch
+
 # mcfly (Ctrl-r shell History https://github.com/cantino/mcfly/tree/master)
 mcfly init fish | source
 # set -gx MCFLY_LIGHT TRUE # Light Mode color scheme
