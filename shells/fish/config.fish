@@ -190,3 +190,18 @@ set -gx MCFLY_INTERFACE_VIEW TOP # Interface View (default: TOP, option: TOP and
 set -gx MCFLY_RESULTS_SORT LAST_RUN # Results Sorting (default: RANK, option: RANK, LAST_RUN)
 # set -gx MCFLY_PROMPT "❯" # Custom Prompt (default: "$")
 
+# Pure-fish config (omf prompt theme)
+# set --universal pure_symbol_prompt "λ"
+# set --universal pure_symbol_prompt " λ"
+set --universal pure_symbol_prompt "λ  "
+# set --universal pure_symbol_prompt " "
+# set --universal pure_symbol_prompt " λ" 
+# set --universal pure_symbol_prompt "╰─λ"
+# set --universal pure_symbol_ssh_prefix ""
+set --universal pure_symbol_container_prefix " "
+# set --universal pure_symbol_virtualenv_prefix ""
+set --universal pure_reverse_prompt_symbol_in_vimode true # default: true
+set --universal pure_separate_prompt_on_error false # default: false
+set --universal pure_show_jobs true # default: false
+set --universal pure_show_prefix_root_prompt true # default: false
+
