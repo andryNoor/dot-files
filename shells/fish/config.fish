@@ -193,10 +193,13 @@ set -gx MCFLY_RESULTS_SORT LAST_RUN # Results Sorting (default: RANK, option: RA
 # Pure-fish config (omf prompt theme)
 # set --universal pure_symbol_prompt "λ"
 # set --universal pure_symbol_prompt " λ"
-set --universal pure_symbol_prompt "λ  "
+# set --universal pure_symbol_prompt "λ  "
 # set --universal pure_symbol_prompt " "
 # set --universal pure_symbol_prompt " λ" 
 # set --universal pure_symbol_prompt "╰─λ"
+set --universal pure_symbol_prompt "╰─ λ"
+# set --universal pure_symbol_prompt "╰─󰁘 λ"
+
 # set --universal pure_symbol_ssh_prefix ""
 set --universal pure_symbol_container_prefix " "
 # set --universal pure_symbol_virtualenv_prefix ""
