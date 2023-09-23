@@ -197,8 +197,10 @@ set -gx MCFLY_RESULTS_SORT LAST_RUN # Results Sorting (default: RANK, option: RA
 # set --universal pure_symbol_prompt " "
 # set --universal pure_symbol_prompt " λ" 
 # set --universal pure_symbol_prompt "╰─λ"
-set --universal pure_symbol_prompt "╰─ λ"
+# set --universal pure_symbol_prompt "╰─ λ"
+# set --universal pure_symbol_prompt "╰─ "
 # set --universal pure_symbol_prompt "╰─󰁘 λ"
+set --universal pure_symbol_prompt "╰─󰁘 "
 
 # set --universal pure_symbol_ssh_prefix ""
 set --universal pure_symbol_container_prefix " "
