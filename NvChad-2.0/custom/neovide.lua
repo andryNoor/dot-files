@@ -2,9 +2,9 @@ local opt = vim.opt
 local g = vim.g
 
 if g.neovide then
-	opt.guifont = "CaskaydiaCove Nerd Font Propo:h12"
+	opt.guifont = "CaskaydiaCove Nerd Font Propo:h10"
   -- g.transparency = 0.68
-  g.neovide_transparency = 0.68
+  g.neovide_transparency = 0.80
   g.neovide_floating_blur_amount_x = 2.0
   g.neovide_floating_blur_amount_y = 2.0
   g.neovide_hide_mouse_when_typing = true
