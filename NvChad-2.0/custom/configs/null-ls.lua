@@ -11,8 +11,12 @@ local sources = {
   -- Lua
   b.formatting.stylua,
 
-  -- cpp
+  -- cpp family
   b.formatting.clang_format,
+  b.formatting.csharpier,
+
+  -- Dart
+  b.formatting.dart_format,
 }
 
 null_ls.setup {
