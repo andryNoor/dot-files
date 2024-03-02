@@ -6,8 +6,8 @@ local highlights = require "custom.highlights"
 
 M.ui = {
   theme = "gatekeeper",
-  theme_toggle = { "gatekeeper", "one_light" },
-  transparency = true,
+  theme_toggle = { "gatekeeper", "oceanic-light" },
+  transparency = false,
 
   hl_override = highlights.override,
   hl_add = highlights.add,
