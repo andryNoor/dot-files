@@ -1,0 +1,6 @@
+{
+  "pyright.disableOrganizeImports": false,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.autoSearchPaths": true,
+  "python.pythonPath": "python",
+}
