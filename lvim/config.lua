@@ -31,7 +31,7 @@ vim.o.termguicolors = true
 
 -- User plugins
 lvim.plugins = {
-  -- [[Colorschemes]]
+  -- [[ Colorschemes ]]
   { "lunarvim/colorschemes" },
   { "samharju/synthweave.nvim" },    -- run :colorscheme synthweave or synthweave-transparent when feeling like it
   {
@@ -163,7 +163,7 @@ lvim.plugins = {
     end
   },
 
-  -- [[Others]]
+  -- [[ Others ]]
   { "mrjones2014/nvim-ts-rainbow" },
   {
     "norcalli/nvim-colorizer.lua", -- colour highlighter
@@ -232,7 +232,7 @@ lvim.plugins = {
     end
   },
 
-  -- [[Python specific]]
+  -- [[ Python specific ]]
   { "ChristianChiarulli/swenv.nvim" },
   { "stevearc/dressing.nvim" },
   { "mfussenegger/nvim-dap-python" },
@@ -559,7 +559,7 @@ lvim.format_on_save.timeout = 3000
 lvim.format_on_save.pattern = { "*.py" }
 lvim.builtin.treesitter.ensure_installed = { "python", } -- automatically install {Languages} syntax highlighting
 
--- [[Python]]
+-- [[ Python ]]
 -- setup formatting
 formatters.setup { { name = "black", filetypes = { "python" } } }
 
@@ -606,8 +606,9 @@ lvim.builtin.which_key.mappings["C"] = {
   c = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" },
 }
 
--- [[End of Python]]
+-- [[ End of Python ]]
 
 --[[ Powershell ]]
 require("powershell_treesitter") -- unmaintained parser for treesitter (syntax highlighting for powershell)
 --[[ End of Powershell ]]
+
