@@ -17,6 +17,10 @@ local sources = {
 
   -- Dart
   b.formatting.dart_format,
+
+  -- Python
+  -- b.formatting.autopep8,
+  b.formatting.ruff,
 }
 
 null_ls.setup {
