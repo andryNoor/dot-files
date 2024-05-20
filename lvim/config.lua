@@ -544,6 +544,10 @@ lv_k.term_mode["<C-j>"] = false
 lv_k.term_mode["<C-k>"] = false
 lv_k.term_mode["<C-l>"] = false
 
+--[[ Gitsigns Mapping ]]
+-- Alternative keymap for <space>gj and <space>gk of Gitsigns hunk (configured by Lvim)
+lv_k.normal_mode["[c"] = "<cmd>lua require 'gitsigns'.prev_hunk({ navigation_message = false })<CR>" -- "Prev Hunk"
+lv_k.normal_mode["]c"] = "<cmd>lua require 'gitsigns'.next_hunk({ navigation_message = false })<CR>" -- "Next Hunk"
 
 -- Language [Programming] specific configurations
 local formatters = require "lvim.lsp.null-ls.formatters"
