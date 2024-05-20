@@ -243,8 +243,8 @@ lvim.plugins = {
 
 
 -- General configs
--- lvim.colorscheme = 'lunar' -- set colorscheme
 -- lvim.transparent_window = true
+-- lvim.colorscheme = 'lunar' -- set colorscheme
 -- lvim.builtin.lualine.options.theme = 'tokyonight'
 if not vim.g.neovide then
   lvim.colorscheme = 'tokyonight' -- set colorscheme
