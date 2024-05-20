@@ -4,7 +4,7 @@ local g = vim.g
 if g.neovide then
   -- lvim specific configs for Neovide
   lvim.colorscheme = 'synthweave-transparent' -- set colorscheme
-  lvim.builtin.lualine.options.theme = 'tokyonight'
+  lvim.builtin.lualine.options.theme = 'auto'
   -- lvim.builtin.lualine.options.theme = 'material'
   -- lvim.builtin.lualine.options.theme = 'synthweave'
 
