@@ -278,124 +278,7 @@ local components = require("lvim.core.lualine.components")
 -- lv_lualine.style = "lvim"
 
 --[[ lualine custom functions ]]
-local lualine_f = {}
-lualine_f.nvtree = function(n, btn)
-  if n == 1 and btn == 'l' then
-    vim.cmd('cd %:p:h')
-    print('CDir to:', vim.fn.getcwd())
-    vim.cmd('NvimTreeToggle')
-  end
-end
-
-lualine_f.print_filename = function(n, btn) -- show filename absolute path
-  if n == 1 and btn == 'l' then
-    vim.cmd('=vim.fn.expand("%:p")')
-  end
-end
-
-lualine_f.float_term_toggle = function(n, btn, md)
-  md = vim.fn.trim(md)
-  if n == 1 and btn == 'l' and md == 'a' then
-    vim.cmd('execute v:count . "ToggleTerm"')
-  elseif n == 1 and btn == 'l' then
-    lualine_f.states.target_btn = not lualine_f.states.target_btn
-  end
-end
-
-lualine_f.new_buf = function(n, btn)
-  if n == 1 and btn == 'l' then
-    vim.cmd('enew')
-    print('new unsave buf at:', vim.fn.expand("%:p:h"))
-  end
-end
-
-lualine_f.cwd = function(n, btn, md)
-  md = vim.fn.trim(md)
-  if n == 1 and btn == 'l' and md == 'a' then
-    lualine_f.states.nvtree = not lualine_f.states.nvtree
-    -- print('nvtree opened status:', lualine_f.states.nvtree)
-    return lualine_f.nvtree(n, btn)
-  elseif n == 1 and btn == 'l' --[[  and md == 'c' ]] then
-    -- print('Folder:', vim.fn.expand("%:p:h"))
-    lualine_f.states.cwd = not lualine_f.states.cwd
-    print('File:', vim.fn.expand("%"), '|', 'Folder (Path):', vim.fn.expand("%:p:h"))
-    return
-  end
-  return vim.fn.fnamemodify(vim.fn.getcwd(), ':t') -- get only the dirname (inspired by NvChad-ui statusline)
-end
-
--- TODO: Next: Assign keymap for time component for easy access or invocation
--- e.g <space>Lh -> normal time; <space>lH -> long fmt time
--- [ <space>L -> LunarVim keymap group ]
-lualine_f.time = function(n, btn, md)
-  md = vim.fn.trim(md)
-
-  if n == 1 and btn == 'l' and md == 'a' then
-    -- print(n, btn, md)
-    if lualine_f.states.dt_fmt then
-      lualine_f.states.countd = 0
-      lualine_f.states.dt_fmt = nil
-    else
-      lualine_f.states.countd = 20 -- in second
-      lualine_f.states.dt_fmt = '%A, %d %B %Y - %H:%M:%S'
-      print(os.date(lualine_f.states.dt_fmt))
-    end
-  elseif n == 1 and btn == 'l' then
-    -- print(n, btn, md)
-    lualine_f.states.target_btn = not lualine_f.states.target_btn
-  elseif lualine_f.states.target_btn and lualine_f.states.dt_fmt and lualine_f.states.countd <= 0 then
-    lualine_f.states.dt_fmt = nil
-    -- print(' ') -- auto clear printed dt at laststatus area (long form)
-  elseif not lualine_f.states.target_btn and lualine_f.states.dt_fmt then
-    lualine_f.states.countd = 0
-    lualine_f.states.dt_fmt = nil
-  end
-  -- print(n, btn, md, lualine_f.states.dt_fmt, lualine_f.states.target_btn)
-  if lualine_f.states.countd > 0 then lualine_f.states.countd = lualine_f.states.countd - 1 end
-  return lualine_f.states.target_btn and os.date(lualine_f.states.dt_fmt or '%H:%M:%S') or ""
-end
-
-lualine_f.empty_separator = {
-  "",
-  color = { bg = '#080808' },
-  -- color = { bg = '#ff5189' },
-  padding = { left = 0, right = 0 },
-  draw_empty = true,
-}
-
-lualine_f.states = {
-  --[[
-
-  PURPOSE:
-  Indicates lualine component 'click' and/or 'custom funcs (on_click)' states
-    [true]      => first or next click | activate
-    [false]     => second or next click | not clicked | deactivate
-    [nil | any] => initial or default state or value [ type or value change as necessary by the caller ]
-
-  NOTE:
-    Not all states here are needed
-
-  --]]
-
-  cwd = false,
-  nvtree = false,
-  target_btn = false, -- 󰀘 [ .time and .float_toggle_term actions or states ]
-  dt_fmt = nil,       -- datetime format [ specified by .time func ]
-  countd = 0          -- default or initial value to keep track of countdown value [ used by .time to autohide | getback to initial dt_fmt ]
-}
-
-lualine_f.color_f = {
-  filename = function()
-    return { fg = "#79dac8", gui = vim.bo.modified and "italic,bold" or "none" }
-  end,
-  time = function()
-    return {
-      fg = lualine_f.states.target_btn --[[ false ]] and '#080808' or '#79dac8',
-      bg = lualine_f.states.target_btn --[[ false ]] and '#79dac8' or '#080808',
-      gui = lualine_f.states.target_btn --[[ false ]] and 'inverse' or 'none'
-    }
-  end
-}
+local lualine_f = require "lualine_f"
 
 --[[ lualine section a ]]
 lv_lualine.sections.lualine_a = {
@@ -569,6 +452,11 @@ lv_k.term_mode["<C-l>"] = false
 -- Alternative keymap for <space>gj and <space>gk of Gitsigns hunk (configured by Lvim)
 lv_k.normal_mode["[c"] = "<cmd>lua require 'gitsigns'.prev_hunk({ navigation_message = false })<CR>" -- "Prev Hunk"
 lv_k.normal_mode["]c"] = "<cmd>lua require 'gitsigns'.next_hunk({ navigation_message = false })<CR>" -- "Next Hunk"
+
+--[[ Lualine Components Mapping ]]
+-- lv_wk.mappings["L"]["h"] = { "lualine_f" } -- lualine_f.time toggle
+-- lv_wk.mappings["L"]["H"] = false -- lualine_f.time toggle (long dt fmt)
+
 
 -- Language [Programming] specific configurations
 local formatters = require "lvim.lsp.null-ls.formatters"
