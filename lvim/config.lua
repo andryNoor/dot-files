@@ -324,21 +324,35 @@ lualine_f.cwd = function(n, btn, md)
   return vim.fn.fnamemodify(vim.fn.getcwd(), ':t') -- get only the dirname (inspired by NvChad-ui statusline)
 end
 
+-- TODO: Next: Assign keymap for time component for easy access or invocation
+-- e.g <space>Lh -> normal time; <space>lH -> long fmt time
+-- [ <space>L -> LunarVim keymap group ]
 lualine_f.time = function(n, btn, md)
   md = vim.fn.trim(md)
-  -- NOTE: Experiment
+
   if n == 1 and btn == 'l' and md == 'a' then
     -- print(n, btn, md)
-    print(not os.date('%A, %d %B %Y - %H:%M:%S'))
-    -- return os.date('%A, %d %B %Y - %H:%M:%S')
+    if lualine_f.states.dt_fmt then
+      lualine_f.states.countd = 0
+      lualine_f.states.dt_fmt = nil
+    else
+      lualine_f.states.countd = 20 -- in second
+      lualine_f.states.dt_fmt = '%A, %d %B %Y - %H:%M:%S'
+      print(os.date(lualine_f.states.dt_fmt))
+    end
   elseif n == 1 and btn == 'l' then
-    lualine_f.states.target_btn = not lualine_f.states.target_btn
-  elseif lualine_f.states.target_btn then
     -- print(n, btn, md)
-    -- print(lualine_f.cond_dt)
-    return os.date('%H:%M:%S')
+    lualine_f.states.target_btn = not lualine_f.states.target_btn
+  elseif lualine_f.states.target_btn and lualine_f.states.dt_fmt and lualine_f.states.countd <= 0 then
+    lualine_f.states.dt_fmt = nil
+    -- print(' ') -- auto clear printed dt at laststatus area (long form)
+  elseif not lualine_f.states.target_btn and lualine_f.states.dt_fmt then
+    lualine_f.states.countd = 0
+    lualine_f.states.dt_fmt = nil
   end
-  return ""
+  -- print(n, btn, md, lualine_f.states.dt_fmt, lualine_f.states.target_btn)
+  if lualine_f.states.countd > 0 then lualine_f.states.countd = lualine_f.states.countd - 1 end
+  return lualine_f.states.target_btn and os.date(lualine_f.states.dt_fmt or '%H:%M:%S') or ""
 end
 
 lualine_f.empty_separator = {
@@ -351,17 +365,23 @@ lualine_f.empty_separator = {
 
 lualine_f.states = {
   --[[
-  Purpose:
+
+  PURPOSE:
   Indicates lualine component 'click' and/or 'custom funcs (on_click)' states
-    [true] => first or next click | activate
-    [false] => second or next click | not clicked | deactivate
-  Note:
-    Not all states are needed
+    [true]      => first or next click | activate
+    [false]     => second or next click | not clicked | deactivate
+    [nil | any] => initial or default state or value [ type or value change as necessary by the caller ]
+
+  NOTE:
+    Not all states here are needed
+
   --]]
 
   cwd = false,
   nvtree = false,
-  target_btn = false, -- 󰀘 [.time and .float_toggle_term actions or states]
+  target_btn = false, -- 󰀘 [ .time and .float_toggle_term actions or states ]
+  dt_fmt = nil,       -- datetime format [ specified by .time func ]
+  countd = 0          -- default or initial value to keep track of countdown value [ used by .time to autohide | getback to initial dt_fmt ]
 }
 
 lualine_f.color_f = {
@@ -611,4 +631,3 @@ lvim.builtin.which_key.mappings["C"] = {
 --[[ Powershell ]]
 require("powershell_treesitter") -- unmaintained parser for treesitter (syntax highlighting for powershell)
 --[[ End of Powershell ]]
-
