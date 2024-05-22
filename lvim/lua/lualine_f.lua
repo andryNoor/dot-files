@@ -16,6 +16,7 @@ end
 
 M.float_term_toggle = function(n, btn, md)
   md = vim.fn.trim(md)
+
   if n == 1 and btn == 'l' and md == 'a' then
     vim.cmd('execute v:count . "ToggleTerm"')
   elseif n == 1 and btn == 'l' then
@@ -32,6 +33,7 @@ end
 
 M.cwd = function(n, btn, md)
   md = vim.fn.trim(md)
+
   if n == 1 and btn == 'l' and md == 'a' then
     M.states.nvtree = not M.states.nvtree
     -- print('nvtree opened status:', lualine_f.states.nvtree)
@@ -45,9 +47,6 @@ M.cwd = function(n, btn, md)
   return vim.fn.fnamemodify(vim.fn.getcwd(), ':t') -- get only the dirname (inspired by NvChad-ui statusline)
 end
 
--- TODO: Next: Assign keymap for time component for easy access or invocation
--- e.g <space>Lh -> normal time; <space>LH -> long fmt time
--- [ <space>L -> LunarVim keymap group ]
 M.time = function(n, btn, md)
   md = vim.fn.trim(md)
 
