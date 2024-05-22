@@ -53,6 +53,12 @@ M.time = function(n, btn, md)
 
   if n == 1 and btn == 'l' and md == 'a' then
     -- print(n, btn, md)
+    if not M.states.target_btn then
+      -- make sure it's active;
+      -- main purpose: make it possible for toggling via shortcut directly
+      -- without needing to invoke hide/unhide toggle first, e.g. by triggering on_click;
+      M.states.target_btn = true
+    end
     if M.states.dt_fmt then
       M.states.countd = 0
       M.states.dt_fmt = nil
@@ -72,7 +78,8 @@ M.time = function(n, btn, md)
     M.states.dt_fmt = nil
   end
   -- print(n, btn, md, lualine_f.states.dt_fmt, lualine_f.states.target_btn)
-  if M.states.countd > 0 then M.states.countd = M.states.countd - 1 end
+  -- if lualine_f.states.countd >= -2 then print(lualine_f.states.countd) end
+  if M.states.countd > 0 and M.states.target_btn then M.states.countd = M.states.countd - 1 end
   return M.states.target_btn and os.date(M.states.dt_fmt or '%H:%M:%S') or ""
 end
 
