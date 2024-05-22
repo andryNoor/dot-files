@@ -65,7 +65,7 @@ M.time = function(n, btn, md)
     else
       M.states.countd = 30 -- in second
       M.states.dt_fmt = '%A, %d %B %Y - %H:%M:%S'
-      print(os.date(M.states.dt_fmt))
+      -- print(os.date(M.states.dt_fmt))
     end
   elseif n == 1 and btn == 'l' then
     -- print(n, btn, md)
