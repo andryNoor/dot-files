@@ -63,7 +63,7 @@ M.time = function(n, btn, md)
       M.states.countd = 0
       M.states.dt_fmt = nil
     else
-      M.states.countd = 20 -- in second
+      M.states.countd = 30 -- in second
       M.states.dt_fmt = '%A, %d %B %Y - %H:%M:%S'
       print(os.date(M.states.dt_fmt))
     end
