@@ -247,7 +247,7 @@ lvim.plugins = {
 -- lvim.colorscheme = 'lunar' -- set colorscheme
 -- lvim.builtin.lualine.options.theme = 'tokyonight'
 if not vim.g.neovide then
-  lvim.colorscheme = 'tokyonight' -- set colorscheme
+  lvim.colorscheme = 'tokyonight-moon' -- set colorscheme
   lvim.builtin.lualine.options.theme = require "lualine_bubbles_theme"
 end
 require("neovide")          -- Neovide
