@@ -346,7 +346,7 @@ lv_lualine.sections.lualine_y = {
         local path_sep = package.config:sub(1, 1) -- default: '\' in Windows OS
         lualine_f.states.cwd = not lualine_f.states.cwd
 
-        return str .. path_sep .. vim.fn.expand('%')
+        return str .. path_sep .. vim.fn.fnamemodify(vim.fn.expand("%"), ":t")
       end
       )() or str -- Purpose:
       -- to revert the state of this component
