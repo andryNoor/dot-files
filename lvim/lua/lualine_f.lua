@@ -41,7 +41,7 @@ M.cwd = function(n, btn, md)
   elseif n == 1 and btn == 'l' --[[  and md == 'c' ]] then
     -- print('Folder:', vim.fn.expand("%:p:h"))
     M.states.cwd = not M.states.cwd
-    print('File:', vim.fn.expand("%"), '|', 'Folder (Path):', vim.fn.expand("%:p:h"))
+    print('File:', vim.fn.fnamemodify(vim.fn.expand("%"), ':t'), '|', 'Folder:', vim.fn.expand("%:p:h"))
     return
   end
   return vim.fn.fnamemodify(vim.fn.getcwd(), ':t') -- get only the dirname (inspired by NvChad-ui statusline)
