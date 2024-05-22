@@ -278,7 +278,7 @@ local components = require("lvim.core.lualine.components")
 -- lv_lualine.style = "lvim"
 
 --[[ lualine custom functions ]]
-local lualine_f = require "lualine_f"
+local lualine_f = require_safe "lualine_f"
 
 --[[ lualine section a ]]
 lv_lualine.sections.lualine_a = {
@@ -454,8 +454,18 @@ lv_k.normal_mode["[c"] = "<cmd>lua require 'gitsigns'.prev_hunk({ navigation_mes
 lv_k.normal_mode["]c"] = "<cmd>lua require 'gitsigns'.next_hunk({ navigation_message = false })<CR>" -- "Next Hunk"
 
 --[[ Lualine Components Mapping ]]
--- lv_wk.mappings["L"]["h"] = { "lualine_f" } -- lualine_f.time toggle
--- lv_wk.mappings["L"]["H"] = false -- lualine_f.time toggle (long dt fmt)
+lv_wk.mappings["L"]["h"] = { "<cmd>lua require_safe 'lualine_f'.time(1, 'l')<CR>", "Toggle Time" }               -- lualine_f.time toggle
+lv_wk.mappings["L"]["H"] = { "<cmd>lua require_safe 'lualine_f'.time(1, 'l', 'a')<CR>", "Toggle Date and Time" } -- lualine_f.time toggle (long dt fmt)
+
+-- NOTE:
+-- only for manual debuging purpose of `lualine_f` when doing its configurations;
+-- why?: because I need to temporarily move all `lualine_f` elements here from its
+-- separate module under `lua/lualine_f`. It seems LunarVim cannot include my changes
+-- there without restarting NVim especially while experimenting with my custom funcs
+-- for `on_click` of lualine option, it's not the case when
+-- `lualine_f` is written here directly. [config.lua];
+-- lualine_f.time(1, 'l') -- hide/undhide datetime component
+-- lualine_f.time(1, 'l', 'a') -- toggle datetime format (time or datetime)
 
 
 -- Language [Programming] specific configurations
