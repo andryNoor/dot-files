@@ -25,7 +25,23 @@ vim.g.clipboard = {
   },
 }
 
-vim.o.autochdir = true                              -- Auto change directory based on buffer location. cmd: [set autochdir!] | [cd %:p:h]
+-- Auto change directory based on buffer location. cmd: [set autochdir!] | [cd %:p:h]
+-- TODO: try the code below for autochdir on autocmd `BufEnter`.
+-- related to our experiment to activate lualine_f.cwd() without needing to
+-- enter Insert mode and save (on opened buffer) first.
+-- lvim.autocommands = {
+--   {
+--     { "BufEnter" },
+--     {
+--       pattern = "*",
+--       -- command = "lua vim.o.autochdir = true"
+--       callback = function()
+--         vim.o.autochdir = true
+--       end,
+--     }
+--   }
+-- }
+vim.o.autochdir = true
 vim.o.guifont = "CaskaydiaCove Nerd Font Propo:h10" -- Set guifont
 vim.o.termguicolors = true
 
