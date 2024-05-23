@@ -342,13 +342,20 @@ lv_lualine.sections.lualine_y = {
     separator = { left = '', --[[  right = '' ]] },
     padding = { left = 0, right = 1 },
     fmt = function(str)
-      return lualine_f.states.cwd and (function()
-        local path_sep = package.config:sub(1, 1) -- default: '\' in Windows OS
-        lualine_f.states.cwd = not lualine_f.states.cwd
+      return (lualine_f.states.cwd or vim.bo.filetype == "NvimTree") and
+          (function()
+            local path_sep = package.config:sub(1, 1) -- default: '\' in Windows OS
+            if vim.bo.filetype == "NvimTree" then
+              lualine_f.states.cwd = true             -- keep it on
+              return str .. path_sep .. ' [ ' .. vim.bo.filetype .. ' ]'
+            else
+              lualine_f.states.cwd = not lualine_f.states.cwd -- flip/reset the state
+            end
 
-        return str .. path_sep .. vim.fn.fnamemodify(vim.fn.expand("%"), ":t")
-      end
-      )() or str -- Purpose:
+            return str .. path_sep .. vim.fn.fnamemodify(vim.fn.expand("%"), ":t")
+          end
+          )() --[[ return specified defined on func above ]] or str --[[ return default format ]]
+      -- Purpose:
       -- to revert the state of this component
       -- based on `lualine_f.states.cwd` in 1000ms.
       -- lualine's options = { refresh = { statusline = 1000 } }
