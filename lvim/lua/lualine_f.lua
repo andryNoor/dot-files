@@ -35,14 +35,11 @@ M.cwd = function(n, btn, md)
   md = vim.fn.trim(md)
 
   if n == 1 and btn == 'l' and md == 'a' then
-    M.states.nvtree = not M.states.nvtree
-    -- print('nvtree opened status:', lualine_f.states.nvtree)
-    return M.nvtree(n, btn)
-  elseif n == 1 and btn == 'l' --[[  and md == 'c' ]] then
-    -- print('Folder:', vim.fn.expand("%:p:h"))
+    -- M.states.nvtree = not M.states.nvtree -- not needed for now
+    M.nvtree(n, btn)
+  elseif n == 1 and btn == 'l' then
     M.states.cwd = not M.states.cwd
     print('File:', vim.fn.fnamemodify(vim.fn.expand("%"), ':t'), '|', 'Folder:', vim.fn.expand("%:p:h"))
-    return
   end
   return vim.fn.fnamemodify(vim.fn.getcwd(), ':t') -- get only the dirname (inspired by NvChad-ui statusline)
 end
@@ -105,7 +102,7 @@ M.states = {
   --]]
 
   cwd = false,
-  nvtree = false,
+  -- nvtree = false,  -- not needed for now
   target_btn = false, -- 󰀘 [ .time and .float_toggle_term actions or states ]
   dt_fmt = nil,       -- datetime format [ specified by .time func ]
   countd = 0          -- default or initial value to keep track of countdown value [ used by .time to autohide | getback to initial dt_fmt ]
