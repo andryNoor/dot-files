@@ -265,6 +265,7 @@ end
 require("neovide")          -- Neovide
 vim.opt.fillchars = "eob: " -- Get rid of tilde '~' [EndOfBuffer]
 lvim.builtin.treesitter.rainbow.enabled = true
+lvim.builtin.cmp.formatting.duplicates.nvim_lsp = 1
 -- if vim.g.neovide then
 -- lvim.autocommands = { -- Change hl group
 --   {
