@@ -53,10 +53,11 @@ lvim.autocommands = {
         --[[ following xsiph dotfile on gitlab ]]
         vim.opt.lazyredraw = false  -- faster scrolling (if set to true) [suggest: false]
         vim.opt.hlsearch = false    -- remove highlighting after search
-        vim.opt.wrap = true         -- line wrapping
+        vim.opt.wrap = false        -- line wrapping (if set to true)
         vim.opt.linebreak = true    -- don't split words
         vim.opt.scrolloff = 4       -- keep 4 rows buffer on screen edges
         vim.opt.colorcolumn = '120' -- line length marker at 80 columns
+        vim.opt.synmaxcol = 240     -- max column for syntax highlight
       end,
     }
   }
