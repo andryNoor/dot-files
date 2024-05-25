@@ -1,7 +1,20 @@
+----[[
+--
+--░█████╗░░█████╗░███╗░░██╗███████╗██╗░██████╗░░░░██╗░░░░░██╗░░░██╗░█████╗░
+--██╔══██╗██╔══██╗████╗░██║██╔════╝██║██╔════╝░░░░██║░░░░░██║░░░██║██╔══██╗
+--██║░░╚═╝██║░░██║██╔██╗██║█████╗░░██║██║░░██╗░░░░██║░░░░░██║░░░██║███████║
+--██║░░██╗██║░░██║██║╚████║██╔══╝░░██║██║░░╚██╗░░░██║░░░░░██║░░░██║██╔══██║
+--╚█████╔╝╚█████╔╝██║░╚███║██║░░░░░██║╚██████╔╝██╗███████╗╚██████╔╝██║░░██║
+--░╚════╝░░╚════╝░╚═╝░░╚══╝╚═╝░░░░░╚═╝░╚═════╝░╚═╝╚══════╝░╚═════╝░╚═╝░░╚═╝
+--
+-- LunarVim configuratin file
+
 -- Read the docs: https://www.lunarvim.org/docs/configuration
 -- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
+----]]
+
 
 -- Enable powershell as your default shell
 vim.opt.shell = "pwsh.exe -NoLogo"
@@ -35,11 +48,20 @@ lvim.autocommands = {
         -- Auto change directory based on buffer location. cmd: [set autochdir!] | [cd %:p:h]
         vim.o.autochdir = true
         vim.o.guifont = "CaskaydiaCove Nerd Font Propo:h10" -- Set guifont
-        vim.o.termguicolors = true
+        vim.o.termguicolors = true                          -- enable 24-bit RGB colors
+
+        --[[ following xsiph dotfile on gitlab ]]
+        vim.opt.lazyredraw = false  -- faster scrolling (if set to true) [suggest: false]
+        vim.opt.hlsearch = false    -- remove highlighting after search
+        vim.opt.wrap = true         -- line wrapping
+        vim.opt.linebreak = true    -- don't split words
+        vim.opt.scrolloff = 4       -- keep 4 rows buffer on screen edges
+        vim.opt.colorcolumn = '120' -- line length marker at 80 columns
       end,
     }
   }
 }
+
 
 -- User plugins
 lvim.plugins = {
