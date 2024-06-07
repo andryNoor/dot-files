@@ -573,3 +573,24 @@ lvim.builtin.which_key.mappings["C"] = {
 --[[ Powershell ]]
 require("powershell_treesitter") -- unmaintained parser for treesitter (syntax highlighting for powershell)
 --[[ End of Powershell ]]
+
+--[[ Dart ]]
+require("lspconfig").dartls.setup {} -- Dart lsp [https://github.com/LunarVim/LunarVim/issues/3919]
+--[[ End of Dart ]]
+
+--[[ Elixir ]]
+-- Features: Basic Elixir configuration with TailwindCSS support for Phoenix projects
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "tailwindcss" })
+local opts = {
+  root_dir = function(fname)
+    local util = require "lspconfig/util"
+    return util.root_pattern("assets/tailwind.config.js", "tailwind.config.js", "tailwind.config.cjs", "tailwind.js",
+      "tailwind.cjs")(fname)
+  end,
+  init_options = {
+    userLanguages = { heex = "html", elixir = "html" }
+  },
+}
+require("lvim.lsp.manager").setup("tailwindcss", opts)
+
+--[[ End of Elixir ]]
