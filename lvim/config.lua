@@ -518,7 +518,8 @@ local linters = require "lvim.lsp.null-ls.linters"
 lvim.format_on_save.enabled = true
 lvim.format_on_save.timeout = 3000
 lvim.format_on_save.pattern = { "*.py" }
-lvim.builtin.treesitter.ensure_installed = { "python", } -- automatically install {Languages} syntax highlighting
+lvim.builtin.treesitter.ensure_installed = { "python", "elixir", "heex" } -- automatically install {Languages} syntax highlighting
+lvim.lsp.installer.setup.ensure_installed = { "cssls", "tsserver", "tailwindcss", "elixirls" }
 
 -- [[ Python ]]
 -- setup formatting
