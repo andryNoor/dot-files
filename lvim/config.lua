@@ -494,6 +494,55 @@ lv_wk.mappings["F"] = { "<cmd>lua =vim.api.nvim_buf_get_name(0)<CR><cmd>let @\" 
 lv_wk.mappings["G"] = { "<cmd>lua =vim.fn.getcwd()<CR><cmd>let @\" = getcwd()<CR>",
   "Print & Yank Current Buffer Location" }
 
+--[[ User Defined Mappings: Window Appearance ]]
+local user_cmd = vim.api.nvim_create_user_command
+
+-- Command to toggle `background` [ 'dark' || 'light' ]
+user_cmd('ToggleBackgroundType', function()
+  if vim.o.background == 'dark' then
+    vim.o.background = 'light'
+    vim.cmd('LvimReload')
+  else
+    vim.o.background = 'dark'
+    vim.cmd('LvimReload')
+  end
+end, { desc = 'Command for toggling background type between "dark" and "light"' })
+lv_wk.mappings["L"]["s"] = { "<cmd>ToggleBackgroundType<CR>", "Toggle Theme" }
+
+-- Toggle Transparent Window
+local hl_groups = {
+  Normal = '',
+  SignColumn = '',
+  NormalNC = '',
+  TelescopeBorder = '',
+  NvimTreeNormal = '',
+  NvimTreeNormalNC = '',
+  EndOfBuffer = '',
+  MsgArea = '',
+}
+
+-- NOTE:
+-- Scenario: Initial window is not transparent (lvim.transparent_window is not being set/used)
+-- otherwise this functionality serve no purpose.
+-- In other words please do not use lvim.transparent_window
+user_cmd("ToggleTransparentWindow", function()
+  --[[ Takes default (non-None) values of current hl_name (group) from active colorscheme ]]
+  for hl_name, value in pairs(hl_groups) do
+    -- local bg = vim.api.nvim_get_hl_by_name(hl_name, true).background -- Alternative way
+    local bg = vim.api.nvim_get_hl(0, { name = hl_name }).bg
+
+    if bg then
+      hl_groups[hl_name] = string.format("#%06x", bg)                         -- convert colour to hex and save to hl_groups tbl as default
+      vim.cmd(string.format("highlight %s ctermbg=none guibg=none", hl_name)) -- Set transparent
+    elseif value ~= '' then
+      vim.cmd(string.format("highlight %s guibg=%s", hl_name, value))         -- Revert to default
+    end
+  end
+
+  vim.opt.fillchars = "eob: " -- Get rid of tilde '~' [EndOfBuffer]
+end, { desc = 'Command for toggling Transparent Window' })
+lv_wk.mappings["L"]["t"] = { "<cmd>ToggleTransparentWindow<CR>", "Toggle Transparency" }
+
 --[[ General LSP Mappings | <leader>l and also `g` ]]
 if vim.lsp.buf.range_code_action then
   lv_wk.mappings["l"]["a"] = { "<cmd>lua vim.lsp.buf.range_code_action()<CR>", "Range Code Action" }
