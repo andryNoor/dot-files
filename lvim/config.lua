@@ -282,8 +282,31 @@ lvim.plugins = {
 -- lvim.colorscheme = 'lunar' -- set colorscheme
 -- lvim.builtin.lualine.options.theme = 'tokyonight'
 if not vim.g.neovide then
-  lvim.colorscheme = 'tokyonight-moon' -- set colorscheme
-  lvim.builtin.lualine.options.theme = require "lualine_bubbles_theme"
+  local background = vim.o.background                   -- background: dark || light
+  local bubbles_theme = require "lualine_bubbles_theme" -- lualine custom theme
+
+  local colorscheme = background == 'dark' and 'tokyonight-moon' or 'auto'
+  local lualine_theme = background == 'dark' and bubbles_theme or 'auto'
+  local refresh_lualine = require "lvim.core.lualine".setup -- needed for reloading lualine
+  -- [https://github.com/nvim-lualine/lualine.nvim/issues/310#issuecomment-899924926]
+
+  --[[ Set colorscheme and lualine theme based on background type ]]
+  --NOTE:
+  -- Lvim configuration still needs to be reloaded (<leader>Lr) manually
+  -- if background type (dark || light) is set manually (:set background=[value])
+  -- otherwise lualine theme is not applied to current buffer.
+  -- Lualine itself also needs to be reloaded
+  -- otherwise its theme will not take effect
+  if background == "dark" then
+    lvim.colorscheme = colorscheme
+    lvim.builtin.lualine.options.theme = lualine_theme
+    refresh_lualine() -- Reload Lualine
+  else
+    lvim.colorscheme = colorscheme
+    lvim.builtin.lualine.options.theme = lualine_theme
+    refresh_lualine() -- Reload Lualine
+  end
+
 end
 require("neovide")          -- Neovide
 vim.opt.fillchars = "eob: " -- Get rid of tilde '~' [EndOfBuffer]
