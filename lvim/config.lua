@@ -309,6 +309,7 @@ if not vim.g.neovide then
 
   -- Configure the guicursor (blinking and so on)
   --[[ default (lvim): n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20 ]]
+  -- https://www.reddit.com/r/neovim/comments/105lqyc/how_do_i_change_the_cursor_colour_depending_on/
   vim.o.guicursor = "v:block,n-c-sm:block-blinkon175,i-ci-ve:ver25-blinkon175,r-cr-o:hor20-blinkon175"
 end
 require("neovide")          -- Neovide
