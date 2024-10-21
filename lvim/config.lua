@@ -333,6 +333,17 @@ lvim.builtin.cmp.formatting.duplicates.nvim_lsp = 1
 -- end
 
 
+-- TODO: Nvim background img (suggested by Gemini)
+-- local base64_data = vim.fn.readfile("base64_grid_img.txt")
+-- local base64_str = base64_data[1]
+-- local temp_file = vim.fn.tempname()
+
+-- vim.fn.writefile({ base64_str }, temp_file)
+-- vim.g.background_image = temp_file
+-- vim.g.background_image_color = '#007b7f'
+-- vim.g.background_image_alpha = 100
+
+
 -- Lualine configs
 local lv_lualine = lvim.builtin.lualine
 local lv_icons_ui = require "lvim.icons".ui
