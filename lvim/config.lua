@@ -307,6 +307,9 @@ if not vim.g.neovide then
     refresh_lualine() -- Reload Lualine
   end
 
+  -- Configure the guicursor (blinking and so on)
+  --[[ default (lvim): n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20 ]]
+  vim.o.guicursor = "v:block,n-c-sm:block-blinkon175,i-ci-ve:ver25-blinkon175,r-cr-o:hor20-blinkon175"
 end
 require("neovide")          -- Neovide
 vim.opt.fillchars = "eob: " -- Get rid of tilde '~' [EndOfBuffer]
