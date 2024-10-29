@@ -322,7 +322,7 @@ if not vim.g.neovide then
   local bubbles_theme = require "lualine_bubbles_theme" -- lualine custom theme
   local terminal = is_windows_terminal() and 'tokyonight-moon' or 'tokyonight-day'
 
-  local colorscheme = background == 'dark' and terminal or 'auto'
+  local colorscheme = background == 'dark' and terminal or 'tokyonight-day'
   local lualine_theme = background == 'dark' and bubbles_theme or 'auto'
   local refresh_lualine = require "lvim.core.lualine".setup -- needed for reloading lualine
   -- [https://github.com/nvim-lualine/lualine.nvim/issues/310#issuecomment-899924926]
