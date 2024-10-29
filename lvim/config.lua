@@ -320,7 +320,8 @@ lvim.plugins = {
 if not vim.g.neovide then
   local background = vim.o.background                   -- background: dark || light
   local bubbles_theme = require "lualine_bubbles_theme" -- lualine custom theme
-  local terminal = is_windows_terminal() and 'tokyonight-moon' or 'tokyonight-day'
+  local terminal = is_windows_terminal() and 'material-oceanic' or 'tokyonight-day'
+  -- local terminal = is_windows_terminal() and 'tokyonight-moon' or 'tokyonight-day'
 
   local colorscheme = background == 'dark' and terminal or 'tokyonight-day'
   local lualine_theme = background == 'dark' and bubbles_theme or 'auto'
