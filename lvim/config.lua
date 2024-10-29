@@ -60,6 +60,16 @@ lvim.autocommands = {
         vim.opt.synmaxcol = 240     -- max column for syntax highlight
       end,
     }
+  },
+  {
+    { "VimEnter" },
+    {
+      callback = function()
+        if lvim.colorscheme == 'tokyonight-moon' then
+          vim.cmd('ToggleTransparentWindow')
+        end
+      end
+    }
   }
 }
 
