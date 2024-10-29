@@ -74,6 +74,32 @@ lvim.autocommands = {
 }
 
 
+-- General User Function
+
+--[[ Determine if Windows Terminal is currently in used ]]
+-- NOTE: I use Windows Terminal and also HyperJS Terminal sometimes
+-- Process Name under Windows (pwsh | parent process) is:
+--  Windows Terminal: 'WindowsTerminal'
+--  HyperJS Terminal: 'Hyper'
+-- ------------------------------------
+-- This function only detect whether WT_SESSION (Windows Terminal Env var) is set or not.
+-- Sincse my lvim launch in cmd then in pwsh, its parent process would be 'cmd'
+-- so we cannot rely on parent process.
+-- --------------------------------------------------------------------------------------
+-- returns: true or false or nil
+local function is_windows_terminal()
+  -- Check if WT_SESSION is set
+  local handle = io.popen(
+    'pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "Write-Host $Env:WT_SESSION"')
+
+  if not handle then return end
+  local wt_session = handle:read('*a')
+  handle:close()
+
+  return wt_session:gsub('%s+', '') ~= ''
+end
+
+
 -- User plugins
 lvim.plugins = {
   -- [[ Colorschemes ]]
