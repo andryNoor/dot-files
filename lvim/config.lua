@@ -595,6 +595,15 @@ user_cmd("ToggleTransparentWindow", function()
 end, { desc = 'Command for toggling Transparent Window' })
 lv_wk.mappings["L"]["t"] = { "<cmd>ToggleTransparentWindow<CR>", "Toggle Transparency" }
 
+-- Show or Hide virtual_text (diagnostic)
+user_cmd("ShowDiagnosticHint", function(opts)
+  local _opts = (opts.args == 'true')               -- '' or true considered `true` | else is `false`
+  local _set = vim.diagnostic.config().virtual_text -- used for toggling functionality
+
+  vim.diagnostic.config({ virtual_text = (opts.args == '') and not _set or _opts })
+end, { nargs = '?', desc = 'Toggle vim diagnostic virtual_text (Hint)' })
+lv_wk.mappings["l"]["h"] = { "<cmd>ShowDiagnosticHint<CR>", "Toggle Diagnostic Hint" }
+
 --[[ General LSP Mappings | <leader>l and also `g` ]]
 if vim.lsp.buf.range_code_action then
   lv_wk.mappings["l"]["a"] = { "<cmd>lua vim.lsp.buf.range_code_action()<CR>", "Range Code Action" }
