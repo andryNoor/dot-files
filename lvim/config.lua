@@ -558,13 +558,21 @@ local user_cmd = vim.api.nvim_create_user_command
 
 -- Command to toggle `background` [ 'dark' || 'light' ]
 user_cmd('ToggleBackgroundType', function()
-  if vim.o.background == 'dark' then
-    vim.o.background = 'light'
-    vim.cmd('LvimReload')
-  else
-    vim.o.background = 'dark'
-    vim.cmd('LvimReload')
-  end
+  -- Flip background type
+  vim.o.background = (vim.o.background == 'dark' and 'light' or 'dark')
+  vim.cmd('LvimReload')
+
+  -- Automatically invoke transparency if appropriate
+  -- (Sheduled before LvimReload and run after LvimReload)
+  vim.schedule(function()
+    if _G.Bg_type.is_wt_checked and _G.Bg_type.is_wt
+        and vim.o.background == 'dark'
+        and lvim.colorscheme ~= 'tokyonight-day' then
+      -- print('Entering (checking | toggling transparency) after reload. Theme:', lvim.colorscheme) -- debugin purpose
+      -- print('g.colors_name:', vim.g.colors_name) -- debugging purpose
+      vim.cmd('ToggleTransparentWindow')
+    end
+  end)
 end, { desc = 'Command for toggling background type between "dark" and "light"' })
 lv_wk.mappings["L"]["s"] = { "<cmd>ToggleBackgroundType<CR>", "Toggle Theme" }
 
