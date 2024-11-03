@@ -348,11 +348,8 @@ lvim.plugins = {
 if not vim.g.neovide then
   local background = vim.o.background                   -- background: dark || light
   local bubbles_theme = require "lualine_bubbles_theme" -- lualine custom theme
-  local terminal = is_windows_terminal() and 'material-oceanic' or 'tokyonight-day'
-  -- local terminal = is_windows_terminal() and 'tokyonight-moon' or 'tokyonight-day'
-
-  local colorscheme = background == 'dark' and terminal or 'tokyonight-day'
-  local lualine_theme = background == 'dark' and bubbles_theme or 'auto'
+  local themes = { 'cyberdream', 'tokyonight-day' }
+  local lualine_themes = { bubbles_theme, 'tokyonight' }
   local refresh_lualine = require "lvim.core.lualine".setup -- needed for reloading lualine
   -- [https://github.com/nvim-lualine/lualine.nvim/issues/310#issuecomment-899924926]
 
@@ -363,15 +360,12 @@ if not vim.g.neovide then
   -- otherwise lualine theme is not applied to current buffer.
   -- Lualine itself also needs to be reloaded
   -- otherwise its theme will not take effect
-  if background == "dark" then
-    lvim.colorscheme = colorscheme
-    lvim.builtin.lualine.options.theme = lualine_theme
-    refresh_lualine() -- Reload Lualine
-  else
-    lvim.colorscheme = colorscheme
-    lvim.builtin.lualine.options.theme = lualine_theme
-    refresh_lualine() -- Reload Lualine
-  end
+
+  lvim.colorscheme = background == (_G.Bg_type and _G.Bg_type.bg or 'dark') and themes[1] or themes[2]
+  lvim.builtin.lualine.options.theme = background == (_G.Bg_type and _G.Bg_type.bg or 'dark') and lualine_themes[1] or
+      lualine_themes[2]
+
+  refresh_lualine()
 
   -- Configure the guicursor (blinking and so on)
   --[[ default (lvim): n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20 ]]
@@ -382,25 +376,9 @@ require("neovide")          -- Neovide
 vim.opt.fillchars = "eob: " -- Get rid of tilde '~' [EndOfBuffer]
 lvim.builtin.treesitter.rainbow.enabled = true
 lvim.builtin.cmp.formatting.duplicates.nvim_lsp = 1
--- if vim.g.neovide then
--- lvim.autocommands = { -- Change hl group
---   {
---     { "ColorScheme" },
---     {
---       -- pattern = "synthweave-transparent",
---       pattern = "*",
---       callback = function()
---         -- local black = vim.api.nvim_get_hl(0, { name = "Normal" })["bg"]
---         vim.api.nvim_set_hl(0, "EndOfBuffer",
---           { bg = "black", fg = "black" --[[ ctermbg = "black", ctermfg = "black", ]] })
---       end
---     }
---   }
--- }
--- end
 
 
--- TODO: Nvim background img (suggested by Gemini)
+-- TODO: Nvim background img (suggested by Gemini) [If possible in the future]
 -- local base64_data = vim.fn.readfile("base64_grid_img.txt")
 -- local base64_str = base64_data[1]
 -- local temp_file = vim.fn.tempname()
