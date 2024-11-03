@@ -78,7 +78,7 @@ lvim.autocommands = {
 
 --[[ Determine if Windows Terminal is currently in used ]]
 -- NOTE: I use Windows Terminal and also HyperJS Terminal sometimes
--- Process Name under Windows (pwsh | parent process) is:
+-- Process Name under Windows (pwsh or cmd | parent process) is:
 --  Windows Terminal: 'WindowsTerminal'
 --  HyperJS Terminal: 'Hyper'
 -- ------------------------------------
@@ -88,15 +88,20 @@ lvim.autocommands = {
 -- --------------------------------------------------------------------------------------
 -- returns: true or false or nil
 local function is_windows_terminal()
-  -- Check if WT_SESSION is set
-  local handle = io.popen(
-    'pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "Write-Host $Env:WT_SESSION"')
+  -- /* Check if WT_SESSION is set (using pwsh) */
+  -- local handle = io.popen(
+  -- 'pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "Write-Host $Env:WT_SESSION"')
+
+  -- /* Check if WT_SESSION is set (using cmd) */
+  local handle = io.popen('cmd /d /c echo %WT_SESSION%')
 
   if not handle then return end
   local wt_session = handle:read('*a')
   handle:close()
+  -- print(wt_session) -- debuging purpose
 
-  return wt_session:gsub('%s+', '') ~= ''
+  -- return wt_session:gsub('%s+', '') ~= '' -- return statement to be used if pwsh method is used
+  return wt_session:gsub('%s+', '') ~= '%WT_SESSION%' -- return statement to be used if cmd method is used
 end
 
 
