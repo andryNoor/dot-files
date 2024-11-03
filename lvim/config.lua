@@ -621,6 +621,19 @@ user_cmd("ShowDiagnosticHint", function(opts)
 end, { nargs = '?', desc = 'Toggle vim diagnostic virtual_text (Hint)' })
 lv_wk.mappings["l"]["h"] = { "<cmd>ShowDiagnosticHint<CR>", "Toggle Diagnostic Hint" }
 
+-- TODO: Customise Diagnostic Highlight Group (virtual_text)
+-- NOTE: This highlight colour should blend to its bg colour (fg 70% alpha; bg 30% alpha).
+-- Todo it we should convert its default (current related colorscheme hl):
+-- from raw interger colour -> hex colour -> rgb then convert it back to hex colour
+-- and apply it.
+-- -----
+-- Use the rgb colour and calculate what the colour value (hex) should be.
+-- DiagnosticVirtualTextError
+-- DiagnosticVirtualTextWarn
+-- DiagnosticVirtualTextInfo
+-- DiagnosticVirtualTextHint
+-- DiagnosticVirtualTextOk
+
 --[[ General LSP Mappings | <leader>l and also `g` ]]
 if vim.lsp.buf.range_code_action then
   lv_wk.mappings["l"]["a"] = { "<cmd>lua vim.lsp.buf.range_code_action()<CR>", "Range Code Action" }
