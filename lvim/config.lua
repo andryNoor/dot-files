@@ -603,9 +603,11 @@ user_cmd("ToggleTransparentWindow", function()
       vim.cmd(string.format("highlight %s ctermbg=none guibg=none", hl_name)) -- Set transparent
     elseif value ~= '' then
       vim.cmd(string.format("highlight %s guibg=%s", hl_name, value))         -- Revert to default
+      hl_groups[hl_name] = ''
     end
   end
 
+  -- print('ToggleTransparentWindow is invoked') -- debugging purpose
   vim.opt.fillchars = "eob: " -- Get rid of tilde '~' [EndOfBuffer]
 end, { desc = 'Command for toggling Transparent Window' })
 lv_wk.mappings["L"]["t"] = { "<cmd>ToggleTransparentWindow<CR>", "Toggle Transparency" }
