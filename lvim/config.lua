@@ -104,6 +104,29 @@ local function is_windows_terminal()
   return wt_session:gsub('%s+', '') ~= '%WT_SESSION%' -- return statement to be used if cmd method is used
 end
 
+--[[ Set _G.Bg_type values ]]
+--NOTE:
+-- It is used to help to determine the default colorscheme (theme)
+-- If Windows Terminal is in used [Initial Theme: dark variant, else: light variant]
+local function initialise_bg_type_vals() -- it is not the `vim.o.background`
+  _G.Bg_type = { bg = 'dark', is_wt_checked = false, is_wt = true }
+
+  -- Just to ensure `is_windows_terminal` runs only once
+  if not _G.Bg_type.is_wt_checked then
+    if not is_windows_terminal() then
+      _G.Bg_type.bg = 'light'
+      _G.Bg_type.is_wt = false
+      vim.cmd('LvimReload')
+    end
+  end
+  _G.Bg_type.is_wt_checked = true
+end
+vim.api.nvim_create_autocmd('VimEnter', {
+  -- ensure the initialisation and Terminal check is only once
+  -- (Performed after all initial config is done)
+  callback = initialise_bg_type_vals
+})
+
 
 -- User plugins
 lvim.plugins = {
