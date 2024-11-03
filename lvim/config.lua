@@ -592,24 +592,42 @@ local hl_groups = {
 -- Scenario: Initial window is not transparent (lvim.transparent_window is not being set/used)
 -- otherwise this functionality serve no purpose.
 -- In other words please do not use lvim.transparent_window
-user_cmd("ToggleTransparentWindow", function()
-  --[[ Takes default (non-None) values of current hl_name (group) from active colorscheme ]]
-  for hl_name, value in pairs(hl_groups) do
-    -- local bg = vim.api.nvim_get_hl_by_name(hl_name, true).background -- Alternative way
-    local bg = vim.api.nvim_get_hl(0, { name = hl_name }).bg
+user_cmd("ToggleTransparentWindow", function(opts)
+  local function toggle_transparency()
+    --[[ Takes default (non-None) values of current hl_name (group) from active colorscheme ]]
+    for hl_name, value in pairs(hl_groups) do
+      -- local bg = vim.api.nvim_get_hl_by_name(hl_name, true).background -- Alternative way
+      local bg = vim.api.nvim_get_hl(0, { name = hl_name }).bg
 
-    if bg then
-      hl_groups[hl_name] = string.format("#%06x", bg)                         -- convert colour to hex and save to hl_groups tbl as default
-      vim.cmd(string.format("highlight %s ctermbg=none guibg=none", hl_name)) -- Set transparent
-    elseif value ~= '' then
-      vim.cmd(string.format("highlight %s guibg=%s", hl_name, value))         -- Revert to default
-      hl_groups[hl_name] = ''
+      if bg then
+        hl_groups[hl_name] = string.format("#%06x", bg)                         -- convert colour to hex and save to hl_groups tbl as default
+        vim.cmd(string.format("highlight %s ctermbg=none guibg=none", hl_name)) -- Set transparent
+      elseif value ~= '' then
+        vim.cmd(string.format("highlight %s guibg=%s", hl_name, value))         -- Revert to default
+        hl_groups[hl_name] = ''
+      end
     end
+  end
+
+  if opts.args == '' then
+    toggle_transparency()
+  elseif opts.args == 'confirm' then
+    vim.ui.input({ prompt = 'Toggle Transparency (if appropriate)? ([y]es/no): ' }, function(confirm)
+      -- Trim spaces and convert it to lowercase (if not nil)
+      confirm = confirm ~= nil and confirm:gsub("^%s+", ""):gsub("%s+$", ""):lower() or nil
+
+      if confirm == nil then
+        return
+      elseif confirm == '' or confirm == 'y'
+          or (confirm:sub(1, 3) == 'yes' and confirm:sub(4) == '') then
+        toggle_transparency()
+      end
+    end)
   end
 
   -- print('ToggleTransparentWindow is invoked') -- debugging purpose
   vim.opt.fillchars = "eob: " -- Get rid of tilde '~' [EndOfBuffer]
-end, { desc = 'Command for toggling Transparent Window' })
+end, { nargs = '?', desc = 'Command for toggling Transparent Window' })
 lv_wk.mappings["L"]["t"] = { "<cmd>ToggleTransparentWindow<CR>", "Toggle Transparency" }
 
 -- Show or Hide virtual_text (diagnostic)
