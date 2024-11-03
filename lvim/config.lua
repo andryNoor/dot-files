@@ -65,7 +65,7 @@ lvim.autocommands = {
     { "VimEnter" },
     {
       callback = function()
-        if lvim.colorscheme == 'tokyonight-moon' or 'material-oceanic' then
+        if lvim.colorscheme ~= 'tokyonight-day' and vim.o.background ~= 'light' then
           vim.cmd('ToggleTransparentWindow')
         end
       end
