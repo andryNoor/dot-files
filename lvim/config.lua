@@ -637,7 +637,7 @@ user_cmd("ToggleTransparentWindow", function(opts)
 end, { nargs = '?', desc = 'Command for toggling Transparent Window' })
 lv_wk.mappings["L"]["t"] = { "<cmd>ToggleTransparentWindow<CR>", "Toggle Transparency" }
 lv_wk.mappings["L"]["r"] = { -- Override default mapping [<leader>Lr] :LvimReload
-  -- NOTE: This overriden mapping invokes the sceduled ToggleTransparentWindow after invoked LvimReload
+  -- NOTE: This overriden mapping invokes the scheduled ToggleTransparentWindow after invoked LvimReload
   "<cmd>LvimReload<CR><cmd>lua vim.schedule(function() vim.cmd('ToggleTransparentWindow confirm') end)<CR>",
   "Reload LunarVim's configuration"
 }
