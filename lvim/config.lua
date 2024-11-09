@@ -689,6 +689,10 @@ lv_k.term_mode["<C-l>"] = false
 lv_k.normal_mode["[c"] = "<cmd>lua require 'gitsigns'.prev_hunk({ navigation_message = false })<CR>" -- "Prev Hunk"
 lv_k.normal_mode["]c"] = "<cmd>lua require 'gitsigns'.next_hunk({ navigation_message = false })<CR>" -- "Next Hunk"
 
+--[[ Todo-Comments Mapping ]]
+lv_k.normal_mode["[t"] = "<cmd>lua require('todo-comments').jump_prev()<CR>"
+lv_k.normal_mode["]t"] = "<cmd>lua require('todo-comments').jump_next()<CR>"
+
 --[[ Lualine Components Mapping ]]
 lv_wk.mappings["L"]["h"] = { "<cmd>lua require_safe 'lualine_f'.time(1, 'l')<CR>", "Toggle Time" }               -- lualine_f.time toggle
 lv_wk.mappings["L"]["H"] = { "<cmd>lua require_safe 'lualine_f'.time(1, 'l', 'a')<CR>", "Toggle Date and Time" } -- lualine_f.time toggle (long dt fmt)
