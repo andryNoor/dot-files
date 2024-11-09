@@ -20,9 +20,15 @@ local bubbles_theme = {
     c = { fg = colors.white },
   },
 
+  command = {
+    a = { fg = colors.black, bg = colors.red },
+    b = { fg = colors.grey, bg = colors.violet },
+  },
+
   insert = { a = { fg = colors.black, bg = colors.blue } },
   visual = { a = { fg = colors.black, bg = colors.cyan } },
   replace = { a = { fg = colors.black, bg = colors.red } },
+  terminal = { a = { fg = colors.black, bg = colors.cyan } },
 
   inactive = {
     a = { fg = colors.white, bg = colors.black },
