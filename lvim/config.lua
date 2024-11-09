@@ -545,8 +545,8 @@ lv_wk.setup.plugins.presets.windows = true
 lv_wk.setup.plugins.presets.nav = true
 
 --[[ User Defined Mappings ]]
-lv_k.normal_mode["<Esc>"] = "<cmd>stopinsert<CR><Esc>"
-lv_k.insert_mode["<Esc>"] = "<cmd>stopinsert<CR>"
+lv_k.normal_mode["<Esc>"] = "<Esc><cmd>stopinsert<CR>"
+lv_k.insert_mode["<Esc>"] = "<Esc><cmd>stopinsert<CR>"
 lv_wk.mappings["x"] = { "<cmd>BufferKill<CR>", "Close Buffer" } -- Override default Lvim close buffer keymap (original: <space>c)
 lv_wk.mappings["c"] = { "<cmd>set showcmd!<CR><cmd>echo 'showcmd!'<CR>", "Toggle Showcmd On Status" }
 lv_wk.mappings["n"] = { "<cmd>set nu!<CR>", "Toggle Line Number" }
