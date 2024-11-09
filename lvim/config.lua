@@ -16,7 +16,8 @@
 ----]]
 
 
--- Enable powershell as your default shell
+--INFO: Enable powershell as your default shell
+----------------------------------------------------
 vim.opt.shell = "pwsh.exe -NoLogo"
 vim.opt.shellcmdflag =
 "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
@@ -38,7 +39,8 @@ vim.g.clipboard = {
   },
 }
 
--- General options with autocommand
+--INFO: General options with autocommand
+----------------------------------------------------
 lvim.autocommands = {
   {
     { "BufEnter" },
@@ -74,8 +76,8 @@ lvim.autocommands = {
 }
 
 
--- General User Function
-
+--INFO: General User Function
+----------------------------------------------------
 --[[ Determine if Windows Terminal is currently in used ]]
 -- NOTE: I use Windows Terminal and also HyperJS Terminal sometimes
 -- Process Name under Windows (pwsh or cmd | parent process) is:
@@ -128,7 +130,8 @@ vim.api.nvim_create_autocmd('VimEnter', {
 })
 
 
--- User plugins
+--INFO: User plugins
+----------------------------------------------------
 lvim.plugins = {
   -- [[ Colorschemes ]]
   { "lunarvim/colorschemes" },
@@ -341,7 +344,8 @@ lvim.plugins = {
 }
 
 
--- General configs
+--INFO: General configs
+----------------------------------------------------
 -- lvim.transparent_window = true
 -- lvim.colorscheme = 'lunar' -- set colorscheme
 -- lvim.builtin.lualine.options.theme = 'tokyonight'
@@ -389,7 +393,8 @@ lvim.builtin.cmp.formatting.duplicates.nvim_lsp = 1
 -- vim.g.background_image_alpha = 100
 
 
--- Lualine configs
+--INFO: Lualine configs
+----------------------------------------------------
 local lv_lualine = lvim.builtin.lualine
 local lv_icons_ui = require "lvim.icons".ui
 local components = require("lvim.core.lualine.components")
@@ -508,13 +513,15 @@ lv_lualine.options.section_separators = { left = '', right = '' }
 -- lv_lualine.options.component_separators = { left = '|', right = '' }
 
 
--- LSP configs [currently spesific for lsp_signature.nvim plugin only]
+--INFO: LSP configs [currently spesific for lsp_signature.nvim plugin only]
+---------------------------------------------------------------------------
 lvim.lsp.on_attach_callback = function(client, bufnr)
   require "lsp_signature".on_attach()
 end
 
 
--- Mapping [which_key] and override configs
+--INFO: Mapping [which_key] and override configs
+----------------------------------------------------
 local lv_wk = lvim.builtin.which_key
 local lv_k = lvim.keys
 local lv_term = lvim.builtin.terminal
@@ -697,7 +704,8 @@ lv_wk.mappings["L"]["H"] = { "<cmd>lua require_safe 'lualine_f'.time(1, 'l', 'a'
 -- lualine_f.time(1, 'l', 'a') -- toggle datetime format (time or datetime)
 
 
--- Language [Programming] specific configurations
+--INFO: Language [Programming] specific configurations
+------------------------------------------------------
 local formatters = require "lvim.lsp.null-ls.formatters"
 local linters = require "lvim.lsp.null-ls.linters"
 -- local codeActions = require "lvim.lsp.null-ls.code_actions"
