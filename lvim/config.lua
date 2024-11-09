@@ -693,8 +693,9 @@ lv_k.normal_mode["]c"] = "<cmd>lua require 'gitsigns'.next_hunk({ navigation_mes
 lv_wk.mappings["L"]["h"] = { "<cmd>lua require_safe 'lualine_f'.time(1, 'l')<CR>", "Toggle Time" }               -- lualine_f.time toggle
 lv_wk.mappings["L"]["H"] = { "<cmd>lua require_safe 'lualine_f'.time(1, 'l', 'a')<CR>", "Toggle Date and Time" } -- lualine_f.time toggle (long dt fmt)
 
--- NOTE:
--- only for manual debuging purpose of `lualine_f` when doing its configurations;
+-- NOTE: [Start]
+--------------------------------------------------------------------------------------
+-- Only for manual debuging purpose of `lualine_f` when doing its configurations;
 -- why?: because I need to temporarily move all `lualine_f` elements here from its
 -- separate module under `lua/lualine_f`. It seems LunarVim cannot include my changes
 -- there without restarting NVim especially while experimenting with my custom funcs
@@ -702,6 +703,13 @@ lv_wk.mappings["L"]["H"] = { "<cmd>lua require_safe 'lualine_f'.time(1, 'l', 'a'
 -- `lualine_f` is written here directly. [config.lua];
 -- lualine_f.time(1, 'l') -- hide/undhide datetime component
 -- lualine_f.time(1, 'l', 'a') -- toggle datetime format (time or datetime)
+-- NOTE: [End]
+-- If there's no more lualine_f specific codes (or commented) between this
+-- 'NOTE' Start and 'NOTE' End, it means the debugging process considered Done.
+-- Mainly we can use lualine functionality and its stuff as expected (with lualine_f).
+-- Actually there's nothing too fancy, I am just adding `Time` component along with
+-- other lualine Components and Events.
+--------------------------------------------------------------------------------------
 
 
 --INFO: Language [Programming] specific configurations
