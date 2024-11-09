@@ -693,6 +693,77 @@ lv_k.normal_mode["]c"] = "<cmd>lua require 'gitsigns'.next_hunk({ navigation_mes
 lv_k.normal_mode["[t"] = "<cmd>lua require('todo-comments').jump_prev()<CR>"
 lv_k.normal_mode["]t"] = "<cmd>lua require('todo-comments').jump_next()<CR>"
 
+--[[ Lvim builtin (nvim-cmp) Mapping [Override some] ]]
+vim.schedule(function()
+  if not lvim.builtin.cmp.mapping['<C-J>']['i'] then
+    -- ensure overriden all keys including this key only once for entire Nvim session
+    return
+  end
+
+  local cmp_mapping_overriden_keymaps = {
+    "<c-j>", -- Lvim Default: Select next completion {insert and command}
+    "<c-k>", -- Lvim Default: Select prev completion {insert and command}
+    "<tab>", -- Lvim Default: Select next completion if_visible or jumpable(1) {insert and select mode}
+    -- "<s-tab>", -- Lvim Default: Select prev completion if_visible or jumpable(-1) {insert and select mode}
+    -- "<c-d>",   -- Lvim Default: Scroll docs up (-4)
+    -- "<c-f>",   -- Lvim Default: Scroll docs down (4)
+  }
+
+  local cmp = require("lvim.utils.modules").require_on_index "cmp"
+  local cmp_mapping = require "cmp.config.mapping"
+  local cmp_mapping_tbl = lvim.builtin.cmp.mapping
+  local luasnip = require("lvim.utils.modules").require_on_index "luasnip"
+  local jumpable = require("lvim.core.cmp").methods.jumpable
+  local has_words_before = require("lvim.core.cmp").methods.has_words_before
+
+  for keymap, _ in pairs(cmp_mapping_tbl) do
+    if vim.tbl_contains(cmp_mapping_overriden_keymaps, keymap:lower()) then
+      if keymap:lower() == '<tab>' then
+        cmp_mapping_tbl[keymap] = cmp_mapping(function(fallback)
+          if cmp.visible() then
+            -- print('entering close if visible')
+            cmp.close()
+            if jumpable(1) then
+              -- print('entering close if visible - jumpable')
+              luasnip.jump(1)
+            else
+              -- print('entering close if visible - else - fallback')
+              fallback()
+            end
+          elseif luasnip.expand_or_locally_jumpable() then
+            -- print('entering expand and jump')
+            -- WARN: We need to jump with this first--DO NOT REMOVE IT.
+            -- I do not know the exact reason why. But it seems we need to do initial jump first
+            -- (even though it is not noticeable visually)
+            luasnip.jump(1) -- this is the key for smooth jumpable snippet | completion movement
+
+            -- Actual jumping actions
+            if has_words_before() and not cmp.visible() then
+              -- print('entering expand or jump - has words before - fallback')
+              fallback()
+            else
+              -- print('entering expand or jump - else - expand_or_jump')
+              luasnip.expand_or_jump()
+            end
+          elseif jumpable(1) then
+            -- print('entering jump only')
+            luasnip.jump(1)
+          elseif has_words_before() then
+            -- print('entering has words before')
+            fallback()
+          else
+            -- print('entering else')
+            fallback()
+          end
+        end, { "i", "s" })
+      else
+        -- Removes <c-j> and <c-k> insert
+        cmp_mapping_tbl[keymap]['i'] = nil
+      end
+    end
+  end
+end)
+
 --[[ Lualine Components Mapping ]]
 lv_wk.mappings["L"]["h"] = { "<cmd>lua require_safe 'lualine_f'.time(1, 'l')<CR>", "Toggle Time" }               -- lualine_f.time toggle
 lv_wk.mappings["L"]["H"] = { "<cmd>lua require_safe 'lualine_f'.time(1, 'l', 'a')<CR>", "Toggle Date and Time" } -- lualine_f.time toggle (long dt fmt)
