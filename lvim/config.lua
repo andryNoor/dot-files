@@ -665,6 +665,11 @@ lv_wk.mappings["l"]["h"] = { "<cmd>ShowDiagnosticHint<CR>", "Toggle Diagnostic H
 -- DiagnosticVirtualTextHint
 -- DiagnosticVirtualTextOk
 
+--[[ User Defined Mappings: Movement ]]
+lv_k.normal_mode["<C-A-l>"] = '<cmd>nohlsearch<CR><Esc>gg"_dG<cmd>stopinsert<CR>' -- Clear highlights, clear screen
+lv_k.insert_mode["<C-l>"] = "<Right>"
+lv_k.insert_mode["<C-k>"] = "<Up>"
+
 --[[ General LSP Mappings | <leader>l and also `g` ]]
 if vim.lsp.buf.range_code_action then
   lv_wk.mappings["l"]["a"] = { "<cmd>lua vim.lsp.buf.range_code_action()<CR>", "Range Code Action" }
