@@ -39,6 +39,7 @@ vim.g.clipboard = {
   },
 }
 
+
 --INFO: General options with autocommand
 ----------------------------------------------------
 lvim.autocommands = {
@@ -871,3 +872,4 @@ local opts = {
 require("lvim.lsp.manager").setup("tailwindcss", opts)
 
 --[[ End of Elixir ]]
+
