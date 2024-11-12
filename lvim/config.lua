@@ -750,7 +750,8 @@ vim.schedule(function()
             -- Actual jumping actions
             if has_words_before() and not cmp.visible() then
               -- print('entering expand or jump - has words before - fallback')
-              fallback()
+              -- luasnip.expand_or_jump() -- use this for default behaviour (expand snippet when hitting tab and cmp is not visible)
+              fallback() -- use this instead if you don't want snippet expanding default behaviour
             else
               -- print('entering expand or jump - else - expand_or_jump')
               luasnip.expand_or_jump()
@@ -881,4 +882,3 @@ local opts = {
 require("lvim.lsp.manager").setup("tailwindcss", opts)
 
 --[[ End of Elixir ]]
-
