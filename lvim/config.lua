@@ -69,7 +69,9 @@ lvim.autocommands = {
     {
       callback = function()
         if lvim.colorscheme ~= 'tokyonight-day' and vim.o.background ~= 'light' then
-          vim.cmd('ToggleTransparentWindow')
+          vim.schedule(function()
+            vim.cmd('ToggleTransparentWindow')
+          end)
         end
       end
     }
@@ -589,16 +591,23 @@ end, { desc = 'Command for toggling background type between "dark" and "light"' 
 lv_wk.mappings["L"]["s"] = { "<cmd>ToggleBackgroundType<CR>", "Toggle Theme" }
 
 -- Toggle Transparent Window
-local hl_groups = {
-  Normal = '',
-  SignColumn = '',
-  NormalNC = '',
-  TelescopeBorder = '',
-  NvimTreeNormal = '',
-  NvimTreeNormalNC = '',
-  EndOfBuffer = '',
-  MsgArea = '',
-}
+vim.schedule(function()
+  -- Ensure it is set only once to use for entire session
+  if _G.Hl_groups then
+    return
+  end
+
+  _G.Hl_groups = {
+    Normal = '',
+    SignColumn = '',
+    NormalNC = '',
+    TelescopeBorder = '',
+    NvimTreeNormal = '',
+    NvimTreeNormalNC = '',
+    EndOfBuffer = '',
+    MsgArea = '',
+  }
+end)
 
 -- NOTE:
 -- Scenario: Initial window is not transparent (lvim.transparent_window is not being set/used)
@@ -607,16 +616,16 @@ local hl_groups = {
 user_cmd("ToggleTransparentWindow", function(opts)
   local function toggle_transparency()
     --[[ Takes default (non-None) values of current hl_name (group) from active colorscheme ]]
-    for hl_name, value in pairs(hl_groups) do
+    for hl_name, value in pairs(_G.Hl_groups) do
       -- local bg = vim.api.nvim_get_hl_by_name(hl_name, true).background -- Alternative way
       local bg = vim.api.nvim_get_hl(0, { name = hl_name }).bg
 
       if bg then
-        hl_groups[hl_name] = string.format("#%06x", bg)                         -- convert colour to hex and save to hl_groups tbl as default
+        _G.Hl_groups[hl_name] = string.format("#%06x", bg)                      -- convert colour to hex and save to hl_groups tbl as default
         vim.cmd(string.format("highlight %s ctermbg=none guibg=none", hl_name)) -- Set transparent
       elseif value ~= '' then
         vim.cmd(string.format("highlight %s guibg=%s", hl_name, value))         -- Revert to default
-        hl_groups[hl_name] = ''
+        _G.Hl_groups[hl_name] = ''
       end
     end
   end
